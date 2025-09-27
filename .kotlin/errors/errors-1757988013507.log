@@ -1,0 +1,473 @@
+kotlin version: 2.0.21
+error message: org.jetbrains.kotlin.backend.common.BackendException: Backend Internal error: Exception during IR lowering
+File being compiled: C:/Users/AldoL/AndroidStudioProjects/ProyectoFinal/app/src/main/java/com/example/proyectofinal/GameActivity.kt
+The root cause java.lang.RuntimeException was thrown at: org.jetbrains.kotlin.backend.jvm.codegen.FunctionCodegen.generate(FunctionCodegen.kt:47)
+	at org.jetbrains.kotlin.backend.common.CodegenUtil.reportBackendException(CodegenUtil.kt:253)
+	at org.jetbrains.kotlin.backend.common.CodegenUtil.reportBackendException$default(CodegenUtil.kt:236)
+	at org.jetbrains.kotlin.backend.common.phaser.PerformByIrFilePhase.invokeSequential(performByIrFile.kt:65)
+	at org.jetbrains.kotlin.backend.common.phaser.PerformByIrFilePhase.invoke(performByIrFile.kt:52)
+	at org.jetbrains.kotlin.backend.common.phaser.PerformByIrFilePhase.invoke(performByIrFile.kt:38)
+	at org.jetbrains.kotlin.backend.common.phaser.NamedCompilerPhase.phaseBody(CompilerPhase.kt:166)
+	at org.jetbrains.kotlin.backend.common.phaser.AbstractNamedCompilerPhase.invoke(CompilerPhase.kt:113)
+	at org.jetbrains.kotlin.backend.common.phaser.CompositePhase.invoke(PhaseBuilders.kt:27)
+	at org.jetbrains.kotlin.backend.common.phaser.CompositePhase.invoke(PhaseBuilders.kt:14)
+	at org.jetbrains.kotlin.backend.common.phaser.NamedCompilerPhase.phaseBody(CompilerPhase.kt:166)
+	at org.jetbrains.kotlin.backend.common.phaser.AbstractNamedCompilerPhase.invoke(CompilerPhase.kt:113)
+	at org.jetbrains.kotlin.backend.common.phaser.CompilerPhaseKt.invokeToplevel(CompilerPhase.kt:62)
+	at org.jetbrains.kotlin.backend.jvm.JvmIrCodegenFactory.invokeCodegen(JvmIrCodegenFactory.kt:371)
+	at org.jetbrains.kotlin.codegen.CodegenFactory.generateModule(CodegenFactory.kt:47)
+	at org.jetbrains.kotlin.backend.jvm.JvmIrCodegenFactory.generateModuleInFrontendIRMode(JvmIrCodegenFactory.kt:433)
+	at org.jetbrains.kotlin.cli.jvm.compiler.pipeline.JvmCompilerPipelineKt.generateCodeFromIr(jvmCompilerPipeline.kt:246)
+	at org.jetbrains.kotlin.cli.jvm.compiler.pipeline.JvmCompilerPipelineKt.compileModulesUsingFrontendIrAndLightTree(jvmCompilerPipeline.kt:142)
+	at org.jetbrains.kotlin.cli.jvm.K2JVMCompiler.doExecute(K2JVMCompiler.kt:148)
+	at org.jetbrains.kotlin.cli.jvm.K2JVMCompiler.doExecute(K2JVMCompiler.kt:43)
+	at org.jetbrains.kotlin.cli.common.CLICompiler.execImpl(CLICompiler.kt:103)
+	at org.jetbrains.kotlin.cli.common.CLICompiler.execImpl(CLICompiler.kt:49)
+	at org.jetbrains.kotlin.cli.common.CLITool.exec(CLITool.kt:101)
+	at org.jetbrains.kotlin.incremental.IncrementalJvmCompilerRunner.runCompiler(IncrementalJvmCompilerRunner.kt:464)
+	at org.jetbrains.kotlin.incremental.IncrementalJvmCompilerRunner.runCompiler(IncrementalJvmCompilerRunner.kt:73)
+	at org.jetbrains.kotlin.incremental.IncrementalCompilerRunner.doCompile(IncrementalCompilerRunner.kt:506)
+	at org.jetbrains.kotlin.incremental.IncrementalCompilerRunner.compileImpl(IncrementalCompilerRunner.kt:423)
+	at org.jetbrains.kotlin.incremental.IncrementalCompilerRunner.tryCompileIncrementally$lambda$9$compile(IncrementalCompilerRunner.kt:249)
+	at org.jetbrains.kotlin.incremental.IncrementalCompilerRunner.tryCompileIncrementally(IncrementalCompilerRunner.kt:267)
+	at org.jetbrains.kotlin.incremental.IncrementalCompilerRunner.compile(IncrementalCompilerRunner.kt:120)
+	at org.jetbrains.kotlin.daemon.CompileServiceImplBase.execIncrementalCompiler(CompileServiceImpl.kt:675)
+	at org.jetbrains.kotlin.daemon.CompileServiceImplBase.access$execIncrementalCompiler(CompileServiceImpl.kt:92)
+	at org.jetbrains.kotlin.daemon.CompileServiceImpl.compile(CompileServiceImpl.kt:1660)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(Unknown Source)
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(Unknown Source)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Unknown Source)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Unknown Source)
+	at java.base/java.security.AccessController.doPrivileged(Unknown Source)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Unknown Source)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(Unknown Source)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(Unknown Source)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(Unknown Source)
+	at java.base/java.security.AccessController.doPrivileged(Unknown Source)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.RuntimeException: Exception while generating code for:
+FUN name:initializeTicTacToe visibility:private modality:FINAL <> ($this:com.example.proyectofinal.GameActivity) returnType:kotlin.Unit
+  $this: VALUE_PARAMETER name:<this> type:com.example.proyectofinal.GameActivity
+  BLOCK_BODY
+    SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:currentPlayer type:kotlin.String visibility:private' type=kotlin.Unit origin=null
+      receiver: GET_VAR '<this>: com.example.proyectofinal.GameActivity declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=com.example.proyectofinal.GameActivity origin=null
+      value: CONST String type=kotlin.String value="X"
+    SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:gameBoard type:kotlin.Array<kotlin.Array<kotlin.String>> visibility:private' type=kotlin.Unit origin=null
+      receiver: GET_VAR '<this>: com.example.proyectofinal.GameActivity declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=com.example.proyectofinal.GameActivity origin=null
+      value: BLOCK type=kotlin.Array<kotlin.Array<kotlin.String>> origin=null
+        VAR IR_TEMPORARY_VARIABLE name:tmp type:kotlin.Int [var]
+          CONST Int type=kotlin.Int value=0
+        VAR IR_TEMPORARY_VARIABLE name:tmp type:kotlin.Array<kotlin.Array<kotlin.String>> [val]
+          CALL 'public final fun arrayOfNulls <T> (size: kotlin.Int): kotlin.Array<T of kotlin.arrayOfNulls?> declared in kotlin' type=kotlin.Array<kotlin.Array<kotlin.String>> origin=null
+            <T>: kotlin.Array<kotlin.String>
+            size: CONST Int type=kotlin.Int value=3
+        WHILE label=GameActivity$initializeTicTacToe3 origin=null
+          condition: CALL 'public final fun less (arg0: kotlin.Int, arg1: kotlin.Int): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=null
+            arg0: GET_VAR 'var tmp: kotlin.Int [var] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=kotlin.Int origin=null
+            arg1: CONST Int type=kotlin.Int value=3
+          body: BLOCK type=kotlin.Unit origin=null
+            VAR IR_TEMPORARY_VARIABLE name:tmp type:kotlin.Int [val]
+              GET_VAR 'var tmp: kotlin.Int [var] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=kotlin.Int origin=null
+            CALL 'public final fun set (index: kotlin.Int, value: T of kotlin.Array): kotlin.Unit [operator] declared in kotlin.Array' type=kotlin.Unit origin=null
+              $this: GET_VAR 'val tmp: kotlin.Array<kotlin.Array<kotlin.String>> [val] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=kotlin.Array<kotlin.Array<kotlin.String>> origin=null
+              index: GET_VAR 'val tmp: kotlin.Int [val] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=kotlin.Int origin=null
+              value: BLOCK type=kotlin.Array<kotlin.String> origin=null
+                BLOCK type=kotlin.Array<kotlin.String> origin=null
+                  VAR IR_TEMPORARY_VARIABLE name:tmp type:kotlin.Int [var]
+                    CONST Int type=kotlin.Int value=0
+                  VAR IR_TEMPORARY_VARIABLE name:tmp type:kotlin.Array<kotlin.String> [val]
+                    CALL 'public final fun arrayOfNulls <T> (size: kotlin.Int): kotlin.Array<T of kotlin.arrayOfNulls?> declared in kotlin' type=kotlin.Array<kotlin.String> origin=null
+                      <T>: kotlin.String
+                      size: CONST Int type=kotlin.Int value=3
+                  WHILE label=GameActivity$initializeTicTacToe4 origin=null
+                    condition: CALL 'public final fun less (arg0: kotlin.Int, arg1: kotlin.Int): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=null
+                      arg0: GET_VAR 'var tmp: kotlin.Int [var] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=kotlin.Int origin=null
+                      arg1: CONST Int type=kotlin.Int value=3
+                    body: BLOCK type=kotlin.Unit origin=null
+                      VAR IR_TEMPORARY_VARIABLE name:tmp type:kotlin.Int [val]
+                        GET_VAR 'var tmp: kotlin.Int [var] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=kotlin.Int origin=null
+                      CALL 'public final fun set (index: kotlin.Int, value: T of kotlin.Array): kotlin.Unit [operator] declared in kotlin.Array' type=kotlin.Unit origin=null
+                        $this: GET_VAR 'val tmp: kotlin.Array<kotlin.String> [val] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=kotlin.Array<kotlin.String> origin=null
+                        index: GET_VAR 'val tmp: kotlin.Int [val] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=kotlin.Int origin=null
+                        value: BLOCK type=kotlin.String origin=null
+                          CONST String type=kotlin.String value=""
+                      CALL 'public final fun <int-prefix-incr-decr> (value: kotlin.Int, delta: kotlin.Int): kotlin.Int declared in kotlin.jvm.internal' type=kotlin.Int origin=null
+                        value: GET_VAR 'var tmp: kotlin.Int [var] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=kotlin.Int origin=null
+                        delta: CONST Int type=kotlin.Int value=1
+                  GET_VAR 'val tmp: kotlin.Array<kotlin.String> [val] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=kotlin.Array<kotlin.String> origin=null
+            CALL 'public final fun <int-prefix-incr-decr> (value: kotlin.Int, delta: kotlin.Int): kotlin.Int declared in kotlin.jvm.internal' type=kotlin.Int origin=null
+              value: GET_VAR 'var tmp: kotlin.Int [var] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=kotlin.Int origin=null
+              delta: CONST Int type=kotlin.Int value=1
+        GET_VAR 'val tmp: kotlin.Array<kotlin.Array<kotlin.String>> [val] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=kotlin.Array<kotlin.Array<kotlin.String>> origin=null
+    SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:gameActive type:kotlin.Boolean visibility:private' type=kotlin.Unit origin=null
+      receiver: GET_VAR '<this>: com.example.proyectofinal.GameActivity declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=com.example.proyectofinal.GameActivity origin=null
+      value: CONST Boolean type=kotlin.Boolean value=true
+    VAR name:gridLayout type:android.widget.GridLayout [val]
+      CALL 'public final fun apply <T> (block: @[ExtensionFunctionType] kotlin.Function1<T of kotlin.StandardKt.apply, kotlin.Unit>): T of kotlin.StandardKt.apply [inline] declared in kotlin.StandardKt' type=android.widget.GridLayout origin=null
+        <T>: android.widget.GridLayout
+        $receiver: CONSTRUCTOR_CALL 'public constructor <init> (p0: @[FlexibleNullability] android.content.Context?) declared in android.widget.GridLayout' type=android.widget.GridLayout origin=null
+          p0: GET_VAR '<this>: com.example.proyectofinal.GameActivity declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=com.example.proyectofinal.GameActivity origin=null
+        block: BLOCK type=@[ExtensionFunctionType] kotlin.Function1<android.widget.GridLayout, kotlin.Unit> origin=LAMBDA
+          COMPOSITE type=kotlin.Unit origin=null
+          FUNCTION_REFERENCE 'private final fun initializeTicTacToe$lambda$3 (): kotlin.Unit declared in com.example.proyectofinal.GameActivity' type=@[ExtensionFunctionType] kotlin.Function1<android.widget.GridLayout, kotlin.Unit> origin=INLINE_LAMBDA reflectionTarget=null
+    SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:ticTacToeButtons type:kotlin.Array<kotlin.Array<android.widget.Button>>? visibility:private' type=kotlin.Unit origin=null
+      receiver: GET_VAR '<this>: com.example.proyectofinal.GameActivity declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=com.example.proyectofinal.GameActivity origin=null
+      value: BLOCK type=kotlin.Array<kotlin.Array<android.widget.Button>> origin=null
+        VAR IR_TEMPORARY_VARIABLE name:tmp type:kotlin.Int [var]
+          CONST Int type=kotlin.Int value=0
+        VAR IR_TEMPORARY_VARIABLE name:tmp type:kotlin.Array<kotlin.Array<android.widget.Button>> [val]
+          CALL 'public final fun arrayOfNulls <T> (size: kotlin.Int): kotlin.Array<T of kotlin.arrayOfNulls?> declared in kotlin' type=kotlin.Array<kotlin.Array<android.widget.Button>> origin=null
+            <T>: kotlin.Array<android.widget.Button>
+            size: CONST Int type=kotlin.Int value=3
+        WHILE label=GameActivity$initializeTicTacToe5 origin=null
+          condition: CALL 'public final fun less (arg0: kotlin.Int, arg1: kotlin.Int): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=null
+            arg0: GET_VAR 'var tmp: kotlin.Int [var] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=kotlin.Int origin=null
+            arg1: CONST Int type=kotlin.Int value=3
+          body: BLOCK type=kotlin.Unit origin=null
+            VAR IR_TEMPORARY_VARIABLE name:tmp type:kotlin.Int [val]
+              GET_VAR 'var tmp: kotlin.Int [var] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=kotlin.Int origin=null
+            CALL 'public final fun set (index: kotlin.Int, value: T of kotlin.Array): kotlin.Unit [operator] declared in kotlin.Array' type=kotlin.Unit origin=null
+              $this: GET_VAR 'val tmp: kotlin.Array<kotlin.Array<android.widget.Button>> [val] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=kotlin.Array<kotlin.Array<android.widget.Button>> origin=null
+              index: GET_VAR 'val tmp: kotlin.Int [val] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=kotlin.Int origin=null
+              value: BLOCK type=kotlin.Array<android.widget.Button> origin=null
+                BLOCK type=kotlin.Array<android.widget.Button> origin=null
+                  VAR IR_TEMPORARY_VARIABLE name:tmp type:kotlin.Int [var]
+                    CONST Int type=kotlin.Int value=0
+                  VAR IR_TEMPORARY_VARIABLE name:tmp type:kotlin.Array<android.widget.Button> [val]
+                    CALL 'public final fun arrayOfNulls <T> (size: kotlin.Int): kotlin.Array<T of kotlin.arrayOfNulls?> declared in kotlin' type=kotlin.Array<android.widget.Button> origin=null
+                      <T>: android.widget.Button
+                      size: CONST Int type=kotlin.Int value=3
+                  WHILE label=GameActivity$initializeTicTacToe6 origin=null
+                    condition: CALL 'public final fun less (arg0: kotlin.Int, arg1: kotlin.Int): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=null
+                      arg0: GET_VAR 'var tmp: kotlin.Int [var] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=kotlin.Int origin=null
+                      arg1: CONST Int type=kotlin.Int value=3
+                    body: BLOCK type=kotlin.Unit origin=null
+                      VAR IR_TEMPORARY_VARIABLE name:tmp type:kotlin.Int [val]
+                        GET_VAR 'var tmp: kotlin.Int [var] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=kotlin.Int origin=null
+                      CALL 'public final fun set (index: kotlin.Int, value: T of kotlin.Array): kotlin.Unit [operator] declared in kotlin.Array' type=kotlin.Unit origin=null
+                        $this: GET_VAR 'val tmp: kotlin.Array<android.widget.Button> [val] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=kotlin.Array<android.widget.Button> origin=null
+                        index: GET_VAR 'val tmp: kotlin.Int [val] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=kotlin.Int origin=null
+                        value: BLOCK type=android.widget.Button origin=null
+                          CONSTRUCTOR_CALL 'public constructor <init> (p0: @[FlexibleNullability] android.content.Context?) declared in android.widget.Button' type=android.widget.Button origin=null
+                            p0: GET_VAR '<this>: com.example.proyectofinal.GameActivity declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=com.example.proyectofinal.GameActivity origin=null
+                      CALL 'public final fun <int-prefix-incr-decr> (value: kotlin.Int, delta: kotlin.Int): kotlin.Int declared in kotlin.jvm.internal' type=kotlin.Int origin=null
+                        value: GET_VAR 'var tmp: kotlin.Int [var] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=kotlin.Int origin=null
+                        delta: CONST Int type=kotlin.Int value=1
+                  GET_VAR 'val tmp: kotlin.Array<android.widget.Button> [val] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=kotlin.Array<android.widget.Button> origin=null
+            CALL 'public final fun <int-prefix-incr-decr> (value: kotlin.Int, delta: kotlin.Int): kotlin.Int declared in kotlin.jvm.internal' type=kotlin.Int origin=null
+              value: GET_VAR 'var tmp: kotlin.Int [var] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=kotlin.Int origin=null
+              delta: CONST Int type=kotlin.Int value=1
+        GET_VAR 'val tmp: kotlin.Array<kotlin.Array<android.widget.Button>> [val] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=kotlin.Array<kotlin.Array<android.widget.Button>> origin=null
+    BLOCK type=kotlin.Unit origin=FOR_LOOP
+      COMPOSITE type=kotlin.Unit origin=null
+        VAR FOR_LOOP_VARIABLE name:row type:kotlin.Int [var]
+          CONST Int type=kotlin.Int value=0
+      DO_WHILE label=GameActivity$initializeTicTacToe7 origin=DO_WHILE_COUNTER_LOOP
+        body: COMPOSITE type=kotlin.Unit origin=FOR_LOOP_INNER_WHILE
+          COMPOSITE type=kotlin.Unit origin=FOR_LOOP_NEXT
+            WHEN type=kotlin.Unit origin=null
+              BRANCH
+                if: CALL 'public final fun not (): kotlin.Boolean [operator] declared in kotlin.Boolean' type=kotlin.Boolean origin=null
+                  $this: CALL 'public final fun less (arg0: kotlin.Int, arg1: kotlin.Int): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=null
+                    arg0: GET_VAR 'var row: kotlin.Int [var] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=kotlin.Int origin=null
+                    arg1: CONST Int type=kotlin.Int value=3
+                then: BREAK label=null loop.label=GameActivity$initializeTicTacToe7
+          BLOCK type=kotlin.Unit origin=null
+            BLOCK type=kotlin.Unit origin=FOR_LOOP
+              COMPOSITE type=kotlin.Unit origin=null
+                VAR FOR_LOOP_VARIABLE name:col type:kotlin.Int [var]
+                  CONST Int type=kotlin.Int value=0
+              DO_WHILE label=GameActivity$initializeTicTacToe8 origin=DO_WHILE_COUNTER_LOOP
+                body: COMPOSITE type=kotlin.Unit origin=FOR_LOOP_INNER_WHILE
+                  COMPOSITE type=kotlin.Unit origin=FOR_LOOP_NEXT
+                    WHEN type=kotlin.Unit origin=null
+                      BRANCH
+                        if: CALL 'public final fun not (): kotlin.Boolean [operator] declared in kotlin.Boolean' type=kotlin.Boolean origin=null
+                          $this: CALL 'public final fun less (arg0: kotlin.Int, arg1: kotlin.Int): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=null
+                            arg0: GET_VAR 'var col: kotlin.Int [var] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=kotlin.Int origin=null
+                            arg1: CONST Int type=kotlin.Int value=3
+                        then: BREAK label=null loop.label=GameActivity$initializeTicTacToe8
+                  BLOCK type=kotlin.Unit origin=null
+                    VAR name:button type:android.widget.Button [val]
+                      CALL 'public final fun apply <T> (block: @[ExtensionFunctionType] kotlin.Function1<T of kotlin.StandardKt.apply, kotlin.Unit>): T of kotlin.StandardKt.apply [inline] declared in kotlin.StandardKt' type=android.widget.Button origin=null
+                        <T>: android.widget.Button
+                        $receiver: CONSTRUCTOR_CALL 'public constructor <init> (p0: @[FlexibleNullability] android.content.Context?) declared in android.widget.Button' type=android.widget.Button origin=null
+                          p0: GET_VAR '<this>: com.example.proyectofinal.GameActivity declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=com.example.proyectofinal.GameActivity origin=null
+                        block: BLOCK type=@[ExtensionFunctionType] kotlin.Function1<android.widget.Button, kotlin.Unit> origin=LAMBDA
+                          COMPOSITE type=kotlin.Unit origin=null
+                          FUNCTION_REFERENCE 'private final fun initializeTicTacToe$lambda$6 (this$0: com.example.proyectofinal.GameActivity, $row: kotlin.Int, $col: kotlin.Int): kotlin.Unit declared in com.example.proyectofinal.GameActivity' type=@[ExtensionFunctionType] kotlin.Function1<android.widget.Button, kotlin.Unit> origin=INLINE_LAMBDA reflectionTarget=null
+                            this$0: GET_VAR '<this>: com.example.proyectofinal.GameActivity declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=com.example.proyectofinal.GameActivity origin=null
+                            $row: GET_VAR 'var row: kotlin.Int [var] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=kotlin.Int origin=null
+                            $col: GET_VAR 'var col: kotlin.Int [var] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=kotlin.Int origin=null
+                    CALL 'public final fun set (index: kotlin.Int, value: T of kotlin.Array): kotlin.Unit [operator] declared in kotlin.Array' type=kotlin.Unit origin=EQ
+                      $this: CALL 'public final fun get (index: kotlin.Int): T of kotlin.Array [operator] declared in kotlin.Array' type=kotlin.Array<android.widget.Button> origin=GET_ARRAY_ELEMENT
+                        $this: BLOCK type=kotlin.Array<kotlin.Array<android.widget.Button>> origin=FOLDED_ELVIS
+                          WHEN type=kotlin.Array<kotlin.Array<android.widget.Button>> origin=FOLDED_ELVIS
+                            BRANCH
+                              if: COMPOSITE type=kotlin.Boolean origin=null
+                                VAR IR_TEMPORARY_VARIABLE name:tmp0 type:kotlin.Array<kotlin.Array<android.widget.Button>>? [val]
+                                  GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:ticTacToeButtons type:kotlin.Array<kotlin.Array<android.widget.Button>>? visibility:private' type=kotlin.Array<kotlin.Array<android.widget.Button>>? origin=null
+                                    receiver: GET_VAR '<this>: com.example.proyectofinal.GameActivity declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=com.example.proyectofinal.GameActivity origin=null
+                                CALL 'public final fun not (): kotlin.Boolean [operator] declared in kotlin.Boolean' type=kotlin.Boolean origin=null
+                                  $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=null
+                                    arg0: GET_VAR 'val tmp0: kotlin.Array<kotlin.Array<android.widget.Button>>? [val] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=kotlin.Array<kotlin.Array<android.widget.Button>>? origin=null
+                                    arg1: CONST Null type=kotlin.Nothing? value=null
+                              then: GET_VAR 'val tmp0: kotlin.Array<kotlin.Array<android.widget.Button>>? [val] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=kotlin.Array<kotlin.Array<android.widget.Button>>? origin=null
+                            BRANCH
+                              if: CONST Boolean type=kotlin.Boolean value=true
+                              then: BLOCK type=kotlin.Unit origin=null
+                                CALL 'public final fun throwUninitializedPropertyAccessException (propertyName: kotlin.String): kotlin.Unit declared in kotlin.jvm.internal.Intrinsics' type=kotlin.Unit origin=null
+                                  propertyName: CONST String type=kotlin.String value="ticTacToeButtons"
+                        index: GET_VAR 'var row: kotlin.Int [var] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=kotlin.Int origin=null
+                      index: GET_VAR 'var col: kotlin.Int [var] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=kotlin.Int origin=null
+                      value: GET_VAR 'val button: android.widget.Button [val] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=android.widget.Button origin=null
+                    CALL 'public open fun addView (p0: @[FlexibleNullability] android.view.View?): kotlin.Unit [fake_override] declared in android.widget.GridLayout' type=kotlin.Unit origin=null
+                      $this: GET_VAR 'val gridLayout: android.widget.GridLayout [val] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=android.widget.GridLayout origin=null
+                      p0: GET_VAR 'val button: android.widget.Button [val] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=android.widget.Button origin=null
+                condition: COMPOSITE type=kotlin.Boolean origin=null
+                  CALL 'public final fun <int-prefix-incr-decr> (value: kotlin.Int, delta: kotlin.Int): kotlin.Int declared in kotlin.jvm.internal' type=kotlin.Int origin=null
+                    value: GET_VAR 'var col: kotlin.Int [var] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=kotlin.Int origin=null
+                    delta: CONST Int type=kotlin.Int value=1
+                  CONST Boolean type=kotlin.Boolean value=true
+        condition: COMPOSITE type=kotlin.Boolean origin=null
+          CALL 'public final fun <int-prefix-incr-decr> (value: kotlin.Int, delta: kotlin.Int): kotlin.Int declared in kotlin.jvm.internal' type=kotlin.Int origin=null
+            value: GET_VAR 'var row: kotlin.Int [var] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=kotlin.Int origin=null
+            delta: CONST Int type=kotlin.Int value=1
+          CONST Boolean type=kotlin.Boolean value=true
+    CALL 'public open fun removeAllViews (): kotlin.Unit [fake_override] declared in android.widget.FrameLayout' type=kotlin.Unit origin=null
+      $this: GET_FIELD 'FIELD IR_EXTERNAL_JAVA_DECLARATION_STUB name:gameArea type:@[EnhancedNullability] android.widget.FrameLayout visibility:public [final] declared in com.example.proyectofinal.databinding.ActivityGameBinding' type=@[EnhancedNullability] android.widget.FrameLayout superQualifierSymbol=com.example.proyectofinal.databinding.ActivityGameBinding origin=null
+        receiver: BLOCK type=com.example.proyectofinal.databinding.ActivityGameBinding origin=FOLDED_ELVIS
+          WHEN type=com.example.proyectofinal.databinding.ActivityGameBinding origin=FOLDED_ELVIS
+            BRANCH
+              if: COMPOSITE type=kotlin.Boolean origin=null
+                VAR IR_TEMPORARY_VARIABLE name:tmp0 type:com.example.proyectofinal.databinding.ActivityGameBinding? [val]
+                  GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:binding type:com.example.proyectofinal.databinding.ActivityGameBinding? visibility:private' type=com.example.proyectofinal.databinding.ActivityGameBinding? origin=null
+                    receiver: GET_VAR '<this>: com.example.proyectofinal.GameActivity declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=com.example.proyectofinal.GameActivity origin=null
+                CALL 'public final fun not (): kotlin.Boolean [operator] declared in kotlin.Boolean' type=kotlin.Boolean origin=null
+                  $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=null
+                    arg0: GET_VAR 'val tmp0: com.example.proyectofinal.databinding.ActivityGameBinding? [val] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=com.example.proyectofinal.databinding.ActivityGameBinding? origin=null
+                    arg1: CONST Null type=kotlin.Nothing? value=null
+              then: GET_VAR 'val tmp0: com.example.proyectofinal.databinding.ActivityGameBinding? [val] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=com.example.proyectofinal.databinding.ActivityGameBinding? origin=null
+            BRANCH
+              if: CONST Boolean type=kotlin.Boolean value=true
+              then: BLOCK type=kotlin.Unit origin=null
+                CALL 'public final fun throwUninitializedPropertyAccessException (propertyName: kotlin.String): kotlin.Unit declared in kotlin.jvm.internal.Intrinsics' type=kotlin.Unit origin=null
+                  propertyName: CONST String type=kotlin.String value="binding"
+    CALL 'public open fun addView (p0: @[FlexibleNullability] android.view.View?): kotlin.Unit [fake_override] declared in android.widget.FrameLayout' type=kotlin.Unit origin=null
+      $this: GET_FIELD 'FIELD IR_EXTERNAL_JAVA_DECLARATION_STUB name:gameArea type:@[EnhancedNullability] android.widget.FrameLayout visibility:public [final] declared in com.example.proyectofinal.databinding.ActivityGameBinding' type=@[EnhancedNullability] android.widget.FrameLayout superQualifierSymbol=com.example.proyectofinal.databinding.ActivityGameBinding origin=null
+        receiver: BLOCK type=com.example.proyectofinal.databinding.ActivityGameBinding origin=FOLDED_ELVIS
+          WHEN type=com.example.proyectofinal.databinding.ActivityGameBinding origin=FOLDED_ELVIS
+            BRANCH
+              if: COMPOSITE type=kotlin.Boolean origin=null
+                VAR IR_TEMPORARY_VARIABLE name:tmp0 type:com.example.proyectofinal.databinding.ActivityGameBinding? [val]
+                  GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:binding type:com.example.proyectofinal.databinding.ActivityGameBinding? visibility:private' type=com.example.proyectofinal.databinding.ActivityGameBinding? origin=null
+                    receiver: GET_VAR '<this>: com.example.proyectofinal.GameActivity declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=com.example.proyectofinal.GameActivity origin=null
+                CALL 'public final fun not (): kotlin.Boolean [operator] declared in kotlin.Boolean' type=kotlin.Boolean origin=null
+                  $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=null
+                    arg0: GET_VAR 'val tmp0: com.example.proyectofinal.databinding.ActivityGameBinding? [val] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=com.example.proyectofinal.databinding.ActivityGameBinding? origin=null
+                    arg1: CONST Null type=kotlin.Nothing? value=null
+              then: GET_VAR 'val tmp0: com.example.proyectofinal.databinding.ActivityGameBinding? [val] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=com.example.proyectofinal.databinding.ActivityGameBinding? origin=null
+            BRANCH
+              if: CONST Boolean type=kotlin.Boolean value=true
+              then: BLOCK type=kotlin.Unit origin=null
+                CALL 'public final fun throwUninitializedPropertyAccessException (propertyName: kotlin.String): kotlin.Unit declared in kotlin.jvm.internal.Intrinsics' type=kotlin.Unit origin=null
+                  propertyName: CONST String type=kotlin.String value="binding"
+      p0: GET_VAR 'val gridLayout: android.widget.GridLayout [val] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=android.widget.GridLayout origin=null
+    VAR name:instructions type:android.widget.TextView [val]
+      CALL 'public final fun apply <T> (block: @[ExtensionFunctionType] kotlin.Function1<T of kotlin.StandardKt.apply, kotlin.Unit>): T of kotlin.StandardKt.apply [inline] declared in kotlin.StandardKt' type=android.widget.TextView origin=null
+        <T>: android.widget.TextView
+        $receiver: CONSTRUCTOR_CALL 'public constructor <init> (p0: @[FlexibleNullability] android.content.Context?) declared in android.widget.TextView' type=android.widget.TextView origin=null
+          p0: GET_VAR '<this>: com.example.proyectofinal.GameActivity declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=com.example.proyectofinal.GameActivity origin=null
+        block: BLOCK type=@[ExtensionFunctionType] kotlin.Function1<android.widget.TextView, kotlin.Unit> origin=LAMBDA
+          COMPOSITE type=kotlin.Unit origin=null
+          FUNCTION_REFERENCE 'private final fun initializeTicTacToe$lambda$8 (this$0: com.example.proyectofinal.GameActivity): kotlin.Unit declared in com.example.proyectofinal.GameActivity' type=@[ExtensionFunctionType] kotlin.Function1<android.widget.TextView, kotlin.Unit> origin=INLINE_LAMBDA reflectionTarget=null
+            this$0: GET_VAR '<this>: com.example.proyectofinal.GameActivity declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=com.example.proyectofinal.GameActivity origin=null
+    CALL 'public open fun addView (p0: @[FlexibleNullability] android.view.View?): kotlin.Unit [fake_override] declared in android.widget.FrameLayout' type=kotlin.Unit origin=null
+      $this: GET_FIELD 'FIELD IR_EXTERNAL_JAVA_DECLARATION_STUB name:gameArea type:@[EnhancedNullability] android.widget.FrameLayout visibility:public [final] declared in com.example.proyectofinal.databinding.ActivityGameBinding' type=@[EnhancedNullability] android.widget.FrameLayout superQualifierSymbol=com.example.proyectofinal.databinding.ActivityGameBinding origin=null
+        receiver: BLOCK type=com.example.proyectofinal.databinding.ActivityGameBinding origin=FOLDED_ELVIS
+          WHEN type=com.example.proyectofinal.databinding.ActivityGameBinding origin=FOLDED_ELVIS
+            BRANCH
+              if: COMPOSITE type=kotlin.Boolean origin=null
+                VAR IR_TEMPORARY_VARIABLE name:tmp0 type:com.example.proyectofinal.databinding.ActivityGameBinding? [val]
+                  GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:binding type:com.example.proyectofinal.databinding.ActivityGameBinding? visibility:private' type=com.example.proyectofinal.databinding.ActivityGameBinding? origin=null
+                    receiver: GET_VAR '<this>: com.example.proyectofinal.GameActivity declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=com.example.proyectofinal.GameActivity origin=null
+                CALL 'public final fun not (): kotlin.Boolean [operator] declared in kotlin.Boolean' type=kotlin.Boolean origin=null
+                  $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=null
+                    arg0: GET_VAR 'val tmp0: com.example.proyectofinal.databinding.ActivityGameBinding? [val] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=com.example.proyectofinal.databinding.ActivityGameBinding? origin=null
+                    arg1: CONST Null type=kotlin.Nothing? value=null
+              then: GET_VAR 'val tmp0: com.example.proyectofinal.databinding.ActivityGameBinding? [val] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=com.example.proyectofinal.databinding.ActivityGameBinding? origin=null
+            BRANCH
+              if: CONST Boolean type=kotlin.Boolean value=true
+              then: BLOCK type=kotlin.Unit origin=null
+                CALL 'public final fun throwUninitializedPropertyAccessException (propertyName: kotlin.String): kotlin.Unit declared in kotlin.jvm.internal.Intrinsics' type=kotlin.Unit origin=null
+                  propertyName: CONST String type=kotlin.String value="binding"
+      p0: GET_VAR 'val instructions: android.widget.TextView [val] declared in com.example.proyectofinal.GameActivity.initializeTicTacToe' type=android.widget.TextView origin=null
+
+	at org.jetbrains.kotlin.backend.jvm.codegen.FunctionCodegen.generate(FunctionCodegen.kt:47)
+	at org.jetbrains.kotlin.backend.jvm.codegen.FunctionCodegen.generate$default(FunctionCodegen.kt:40)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ClassCodegen.generateMethodNode(ClassCodegen.kt:406)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ClassCodegen.generateMethod(ClassCodegen.kt:423)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ClassCodegen.generate(ClassCodegen.kt:168)
+	at org.jetbrains.kotlin.backend.jvm.FileCodegen.lower(JvmPhases.kt:39)
+	at org.jetbrains.kotlin.backend.common.phaser.PhaseFactoriesKt.createFilePhase$lambda$4(PhaseFactories.kt:71)
+	at org.jetbrains.kotlin.backend.common.phaser.PhaseBuildersKt$createSimpleNamedCompilerPhase$1.phaseBody(PhaseBuilders.kt:69)
+	at org.jetbrains.kotlin.backend.common.phaser.SimpleNamedCompilerPhase.phaseBody(CompilerPhase.kt:226)
+	at org.jetbrains.kotlin.backend.common.phaser.AbstractNamedCompilerPhase.invoke(CompilerPhase.kt:113)
+	at org.jetbrains.kotlin.backend.common.phaser.PerformByIrFilePhase.invokeSequential(performByIrFile.kt:62)
+	... 44 more
+Caused by: java.lang.RuntimeException: Exception while generating code for:
+FUN INLINE_LAMBDA name:initializeTicTacToe$lambda$6 visibility:private modality:FINAL <> ($receiver:android.widget.Button, this$0:com.example.proyectofinal.GameActivity, $row:kotlin.Int, $col:kotlin.Int) returnType:kotlin.Unit
+  $receiver: VALUE_PARAMETER name:$this$apply type:android.widget.Button
+  VALUE_PARAMETER BOUND_VALUE_PARAMETER name:this$0 index:0 type:com.example.proyectofinal.GameActivity
+  VALUE_PARAMETER BOUND_VALUE_PARAMETER name:$row index:1 type:kotlin.Int
+  VALUE_PARAMETER BOUND_VALUE_PARAMETER name:$col index:2 type:kotlin.Int
+  BLOCK_BODY
+    VAR name:$i$a$-apply-GameActivity$initializeTicTacToe$button$1 type:kotlin.Int [val]
+      CONST Int type=kotlin.Int value=0
+    CALL 'public final fun setText (p0: @[FlexibleNullability] kotlin.CharSequence?): kotlin.Unit [fake_override] declared in android.widget.Button' type=kotlin.Unit origin=EQ
+      $this: GET_VAR '$this$apply: android.widget.Button declared in com.example.proyectofinal.GameActivity.initializeTicTacToe$lambda$6' type=android.widget.Button origin=null
+      p0: CONST String type=kotlin.String value=""
+    CALL 'public open fun setTextSize (p0: kotlin.Float): kotlin.Unit [fake_override] declared in android.widget.Button' type=kotlin.Unit origin=EQ
+      $this: GET_VAR '$this$apply: android.widget.Button declared in com.example.proyectofinal.GameActivity.initializeTicTacToe$lambda$6' type=android.widget.Button origin=null
+      p0: CONST Float type=kotlin.Float value=24.0
+    SET_FIELD 'FIELD IR_EXTERNAL_JAVA_DECLARATION_STUB name:textColor type:kotlin.Int visibility:public [final,static] declared in android.R.attr' type=kotlin.Unit superQualifierSymbol=android.R.attr origin=EQ
+      value: CALL 'public open fun getColor (p0: kotlin.Int, p1: @[EnhancedNullability] android.content.res.Resources.Theme?): kotlin.Int declared in android.content.res.Resources' type=kotlin.Int origin=null
+        $this: CALL 'public open fun getResources (): @[FlexibleNullability] android.content.res.Resources? [fake_override] declared in android.widget.Button' type=@[FlexibleNullability] android.content.res.Resources? origin=GET_PROPERTY
+          $this: GET_VAR '$this$apply: android.widget.Button declared in com.example.proyectofinal.GameActivity.initializeTicTacToe$lambda$6' type=android.widget.Button origin=null
+        p0: CONST Int type=kotlin.Int value=17170443
+        p1: CALL 'public open fun getTheme (): @[FlexibleNullability] android.content.res.Resources.Theme? [fake_override] declared in com.example.proyectofinal.GameActivity' type=@[FlexibleNullability] android.content.res.Resources.Theme? origin=GET_PROPERTY
+          $this: GET_VAR 'this$0: com.example.proyectofinal.GameActivity declared in com.example.proyectofinal.GameActivity.initializeTicTacToe$lambda$6' type=com.example.proyectofinal.GameActivity origin=null
+    CALL 'public open fun setBackgroundColor (p0: kotlin.Int): kotlin.Unit [fake_override] declared in android.widget.Button' type=kotlin.Unit origin=null
+      $this: GET_VAR '$this$apply: android.widget.Button declared in com.example.proyectofinal.GameActivity.initializeTicTacToe$lambda$6' type=android.widget.Button origin=null
+      p0: CALL 'public open fun getColor (p0: kotlin.Int, p1: @[EnhancedNullability] android.content.res.Resources.Theme?): kotlin.Int declared in android.content.res.Resources' type=kotlin.Int origin=null
+        $this: CALL 'public open fun getResources (): @[FlexibleNullability] android.content.res.Resources? [fake_override] declared in android.widget.Button' type=@[FlexibleNullability] android.content.res.Resources? origin=GET_PROPERTY
+          $this: GET_VAR '$this$apply: android.widget.Button declared in com.example.proyectofinal.GameActivity.initializeTicTacToe$lambda$6' type=android.widget.Button origin=null
+        p0: CONST Int type=kotlin.Int value=17170432
+        p1: CALL 'public open fun getTheme (): @[FlexibleNullability] android.content.res.Resources.Theme? [fake_override] declared in com.example.proyectofinal.GameActivity' type=@[FlexibleNullability] android.content.res.Resources.Theme? origin=GET_PROPERTY
+          $this: GET_VAR 'this$0: com.example.proyectofinal.GameActivity declared in com.example.proyectofinal.GameActivity.initializeTicTacToe$lambda$6' type=com.example.proyectofinal.GameActivity origin=null
+    CALL 'public open fun setLayoutParams (p0: @[FlexibleNullability] android.view.ViewGroup.LayoutParams?): kotlin.Unit [fake_override] declared in android.widget.Button' type=kotlin.Unit origin=EQ
+      $this: GET_VAR '$this$apply: android.widget.Button declared in com.example.proyectofinal.GameActivity.initializeTicTacToe$lambda$6' type=android.widget.Button origin=null
+      p0: CALL 'public final fun apply <T> (block: @[ExtensionFunctionType] kotlin.Function1<T of kotlin.StandardKt.apply, kotlin.Unit>): T of kotlin.StandardKt.apply [inline] declared in kotlin.StandardKt' type=android.widget.GridLayout.LayoutParams origin=null
+        <T>: android.widget.GridLayout.LayoutParams
+        $receiver: CONSTRUCTOR_CALL 'public constructor <init> () declared in android.widget.GridLayout.LayoutParams' type=android.widget.GridLayout.LayoutParams origin=null
+        block: BLOCK type=@[ExtensionFunctionType] kotlin.Function1<android.widget.GridLayout.LayoutParams, kotlin.Unit> origin=LAMBDA
+          COMPOSITE type=kotlin.Unit origin=null
+          FUNCTION_REFERENCE 'private final fun initializeTicTacToe$lambda$6$lambda$4 (): kotlin.Unit declared in com.example.proyectofinal.GameActivity' type=@[ExtensionFunctionType] kotlin.Function1<android.widget.GridLayout.LayoutParams, kotlin.Unit> origin=INLINE_LAMBDA reflectionTarget=null
+    CALL 'public open fun setOnClickListener (p0: @[EnhancedNullability] android.view.View.OnClickListener?): kotlin.Unit [fake_override] declared in android.widget.Button' type=kotlin.Unit origin=null
+      $this: GET_VAR '$this$apply: android.widget.Button declared in com.example.proyectofinal.GameActivity.initializeTicTacToe$lambda$6' type=android.widget.Button origin=null
+      p0: BLOCK type=android.view.View.OnClickListener origin=LAMBDA
+        COMPOSITE type=kotlin.Unit origin=null
+        CALL 'public final fun <jvm-indy> <T> (dynamicCall: T of kotlin.jvm.internal.<jvm-indy>, bootstrapMethodHandle: kotlin.Any, vararg bootstrapMethodArguments: kotlin.Any): T of kotlin.jvm.internal.<jvm-indy> declared in kotlin.jvm.internal' type=android.view.View.OnClickListener origin=null
+          <T>: android.view.View.OnClickListener
+          dynamicCall: CALL 'public final fun onClick (p0: com.example.proyectofinal.GameActivity, p1: kotlin.Int, p2: kotlin.Int): android.view.View.OnClickListener declared in kotlin.jvm.internal.invokeDynamic' type=android.view.View.OnClickListener origin=null
+            p0: GET_VAR 'this$0: com.example.proyectofinal.GameActivity declared in com.example.proyectofinal.GameActivity.initializeTicTacToe$lambda$6' type=com.example.proyectofinal.GameActivity origin=null
+            p1: GET_VAR '$row: kotlin.Int declared in com.example.proyectofinal.GameActivity.initializeTicTacToe$lambda$6' type=kotlin.Int origin=null
+            p2: GET_VAR '$col: kotlin.Int declared in com.example.proyectofinal.GameActivity.initializeTicTacToe$lambda$6' type=kotlin.Int origin=null
+          bootstrapMethodHandle: CALL 'public final fun <jvm-method-handle> (tag: kotlin.Int, owner: kotlin.String, name: kotlin.String, descriptor: kotlin.String, isInterface: kotlin.Boolean): kotlin.Any declared in kotlin.jvm.internal' type=kotlin.Any origin=null
+            tag: CONST Int type=kotlin.Int value=6
+            owner: CONST String type=kotlin.String value="java/lang/invoke/LambdaMetafactory"
+            name: CONST String type=kotlin.String value="metafactory"
+            descriptor: CONST String type=kotlin.String value="(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            isInterface: CONST Boolean type=kotlin.Boolean value=false
+          bootstrapMethodArguments: VARARG type=kotlin.Array<kotlin.Any> varargElementType=kotlin.Any
+            CALL 'public final fun <jvm-original-method-type> (method: kotlin.Any): kotlin.Any declared in kotlin.jvm.internal' type=kotlin.Any origin=null
+              method: RAW_FUNCTION_REFERENCE 'public abstract fun onClick (p0: @[FlexibleNullability] android.view.View?): kotlin.Unit declared in android.view.View.OnClickListener' type=kotlin.Any
+            RAW_FUNCTION_REFERENCE 'private final fun initializeTicTacToe$lambda$6$lambda$5 (this$0: com.example.proyectofinal.GameActivity, $row: kotlin.Int, $col: kotlin.Int, it: @[FlexibleNullability] android.view.View?): kotlin.Unit declared in com.example.proyectofinal.GameActivity' type=kotlin.Any
+            CALL 'public final fun <jvm-original-method-type> (method: kotlin.Any): kotlin.Any declared in kotlin.jvm.internal' type=kotlin.Any origin=null
+              method: RAW_FUNCTION_REFERENCE 'public abstract fun onClick (p0: @[FlexibleNullability] android.view.View?): kotlin.Unit [fake_override] declared in kotlin.jvm.internal.invokeDynamic.<fake>' type=kotlin.Any
+
+	at org.jetbrains.kotlin.backend.jvm.codegen.FunctionCodegen.generate(FunctionCodegen.kt:47)
+	at org.jetbrains.kotlin.backend.jvm.codegen.IrSourceCompilerForInline.generateLambdaBody(IrSourceCompilerForInline.kt:67)
+	at org.jetbrains.kotlin.codegen.inline.ExpressionLambda.generateLambdaBody(LambdaInfo.kt:72)
+	at org.jetbrains.kotlin.backend.jvm.codegen.IrInlineCodegen.genValueAndPut(IrInlineCodegen.kt:100)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitCall$handleParameter(ExpressionCodegen.kt:616)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitCall(ExpressionCodegen.kt:644)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitCall(ExpressionCodegen.kt:138)
+	at org.jetbrains.kotlin.ir.expressions.IrCall.accept(IrCall.kt:24)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitVariable(ExpressionCodegen.kt:790)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitVariable(ExpressionCodegen.kt:138)
+	at org.jetbrains.kotlin.ir.declarations.IrVariable.accept(IrVariable.kt:36)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitStatementContainer(ExpressionCodegen.kt:579)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitContainerExpression(ExpressionCodegen.kt:593)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitContainerExpression(ExpressionCodegen.kt:138)
+	at org.jetbrains.kotlin.ir.visitors.IrElementVisitor$DefaultImpls.visitBlock(IrElementVisitor.kt:122)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitBlock(ExpressionCodegen.kt:413)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitBlock(ExpressionCodegen.kt:138)
+	at org.jetbrains.kotlin.ir.expressions.IrBlock.accept(IrBlock.kt:18)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitStatementContainer(ExpressionCodegen.kt:579)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitContainerExpression(ExpressionCodegen.kt:593)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitContainerExpression(ExpressionCodegen.kt:138)
+	at org.jetbrains.kotlin.ir.visitors.IrElementVisitor$DefaultImpls.visitComposite(IrElementVisitor.kt:125)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitComposite(ExpressionCodegen.kt:138)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitComposite(ExpressionCodegen.kt:138)
+	at org.jetbrains.kotlin.ir.expressions.IrComposite.accept(IrComposite.kt:18)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitDoWhileLoop(ExpressionCodegen.kt:1238)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitDoWhileLoop(ExpressionCodegen.kt:138)
+	at org.jetbrains.kotlin.ir.expressions.IrDoWhileLoop.accept(IrDoWhileLoop.kt:19)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitStatementContainer(ExpressionCodegen.kt:579)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitContainerExpression(ExpressionCodegen.kt:593)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitContainerExpression(ExpressionCodegen.kt:138)
+	at org.jetbrains.kotlin.ir.visitors.IrElementVisitor$DefaultImpls.visitBlock(IrElementVisitor.kt:122)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitBlock(ExpressionCodegen.kt:413)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitBlock(ExpressionCodegen.kt:138)
+	at org.jetbrains.kotlin.ir.expressions.IrBlock.accept(IrBlock.kt:18)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitStatementContainer(ExpressionCodegen.kt:579)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitContainerExpression(ExpressionCodegen.kt:593)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitContainerExpression(ExpressionCodegen.kt:138)
+	at org.jetbrains.kotlin.ir.visitors.IrElementVisitor$DefaultImpls.visitBlock(IrElementVisitor.kt:122)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitBlock(ExpressionCodegen.kt:413)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitBlock(ExpressionCodegen.kt:138)
+	at org.jetbrains.kotlin.ir.expressions.IrBlock.accept(IrBlock.kt:18)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitStatementContainer(ExpressionCodegen.kt:579)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitContainerExpression(ExpressionCodegen.kt:593)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitContainerExpression(ExpressionCodegen.kt:138)
+	at org.jetbrains.kotlin.ir.visitors.IrElementVisitor$DefaultImpls.visitComposite(IrElementVisitor.kt:125)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitComposite(ExpressionCodegen.kt:138)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitComposite(ExpressionCodegen.kt:138)
+	at org.jetbrains.kotlin.ir.expressions.IrComposite.accept(IrComposite.kt:18)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitDoWhileLoop(ExpressionCodegen.kt:1238)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitDoWhileLoop(ExpressionCodegen.kt:138)
+	at org.jetbrains.kotlin.ir.expressions.IrDoWhileLoop.accept(IrDoWhileLoop.kt:19)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitStatementContainer(ExpressionCodegen.kt:579)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitContainerExpression(ExpressionCodegen.kt:593)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitContainerExpression(ExpressionCodegen.kt:138)
+	at org.jetbrains.kotlin.ir.visitors.IrElementVisitor$DefaultImpls.visitBlock(IrElementVisitor.kt:122)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitBlock(ExpressionCodegen.kt:413)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitBlock(ExpressionCodegen.kt:138)
+	at org.jetbrains.kotlin.ir.expressions.IrBlock.accept(IrBlock.kt:18)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitStatementContainer(ExpressionCodegen.kt:579)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitBlockBody(ExpressionCodegen.kt:584)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitBlockBody(ExpressionCodegen.kt:138)
+	at org.jetbrains.kotlin.ir.expressions.IrBlockBody.accept(IrBlockBody.kt:20)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.generate(ExpressionCodegen.kt:240)
+	at org.jetbrains.kotlin.backend.jvm.codegen.FunctionCodegen.doGenerate(FunctionCodegen.kt:123)
+	at org.jetbrains.kotlin.backend.jvm.codegen.FunctionCodegen.generate(FunctionCodegen.kt:44)
+	... 54 more
+Caused by: java.lang.AssertionError: access of const val: SET_FIELD 'FIELD IR_EXTERNAL_JAVA_DECLARATION_STUB name:textColor type:kotlin.Int visibility:public [final,static] declared in android.R.attr' type=kotlin.Unit superQualifierSymbol=android.R.attr origin=EQ
+  value: CALL 'public open fun getColor (p0: kotlin.Int, p1: @[EnhancedNullability] android.content.res.Resources.Theme?): kotlin.Int declared in android.content.res.Resources' type=kotlin.Int origin=null
+    $this: CALL 'public open fun getResources (): @[FlexibleNullability] android.content.res.Resources? [fake_override] declared in android.widget.Button' type=@[FlexibleNullability] android.content.res.Resources? origin=GET_PROPERTY
+      $this: GET_VAR '$this$apply: android.widget.Button declared in com.example.proyectofinal.GameActivity.initializeTicTacToe$lambda$6' type=android.widget.Button origin=null
+    p0: CONST Int type=kotlin.Int value=17170443
+    p1: CALL 'public open fun getTheme (): @[FlexibleNullability] android.content.res.Resources.Theme? [fake_override] declared in com.example.proyectofinal.GameActivity' type=@[FlexibleNullability] android.content.res.Resources.Theme? origin=GET_PROPERTY
+      $this: GET_VAR 'this$0: com.example.proyectofinal.GameActivity declared in com.example.proyectofinal.GameActivity.initializeTicTacToe$lambda$6' type=com.example.proyectofinal.GameActivity origin=null
+
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitFieldAccess(ExpressionCodegen.kt:861)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitFieldAccess(ExpressionCodegen.kt:138)
+	at org.jetbrains.kotlin.ir.visitors.IrElementVisitor$DefaultImpls.visitSetField(IrElementVisitor.kt:206)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitSetField(ExpressionCodegen.kt:908)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitSetField(ExpressionCodegen.kt:138)
+	at org.jetbrains.kotlin.ir.expressions.IrSetField.accept(IrSetField.kt:21)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitStatementContainer(ExpressionCodegen.kt:579)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitBlockBody(ExpressionCodegen.kt:584)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitBlockBody(ExpressionCodegen.kt:138)
+	at org.jetbrains.kotlin.ir.expressions.IrBlockBody.accept(IrBlockBody.kt:20)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.generate(ExpressionCodegen.kt:240)
+	at org.jetbrains.kotlin.backend.jvm.codegen.FunctionCodegen.doGenerate(FunctionCodegen.kt:123)
+	at org.jetbrains.kotlin.backend.jvm.codegen.FunctionCodegen.generate(FunctionCodegen.kt:44)
+	... 119 more
+
+

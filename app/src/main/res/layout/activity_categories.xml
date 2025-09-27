@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#021529"
+    android:orientation="vertical"
+    android:padding="24dp"
+    tools:context=".CategoriesActivity">
+
+    <!-- Header con título y bienvenida -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginBottom="32dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GAME VAULT"
+            android:textSize="28sp"
+            android:textColor="#F1F5F9"
+            android:textStyle="bold"
+            android:fontFamily="monospace"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/welcomeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¡Bienvenido Usuario!"
+            android:textSize="18sp"
+            android:textColor="#CBD5E1"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Título de categorías -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SELECCIONA UNA CATEGORÍA:"
+        android:textSize="20sp"
+        android:textColor="#CBD5E1"
+        android:textStyle="bold"
+        android:layout_marginBottom="24dp"
+        android:layout_gravity="center" />
+
+    <!-- Categoría ESTRATEGIA -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp">
+
+        <Button
+            android:id="@+id/btnStrategy"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:text="ESTRATEGIA"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:backgroundTint="#33FF9F"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Da clic para acceder a: Tres en Raya"
+            android:textSize="14sp"
+            android:textColor="#cccccc"
+            android:layout_gravity="center" />
+    </LinearLayout>
+
+    <!-- Categoría CARTAS -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp">
+
+        <Button
+            android:id="@+id/btnCards"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:text="CARTAS"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:backgroundTint="#FF824F"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Da clic para acceder a: 21 BlackJack"
+            android:textSize="14sp"
+            android:textColor="#cccccc"
+            android:layout_gravity="center" />
+    </LinearLayout>
+
+    <!-- Categoría ACCIÓN -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="32dp">
+
+        <Button
+            android:id="@+id/btnAction"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:text="ACCIÓN"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:backgroundTint="#AB36C0"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Da clic para accerder a: Snake"
+            android:textSize="14sp"
+            android:textColor="#cccccc"
+            android:layout_gravity="center" />
+    </LinearLayout>
+
+    <!-- Espaciador que empuja el botón hacia abajo -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- Botón de Cerrar Sesión -->
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="CERRAR SESIÓN"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:backgroundTint="#6B7280" />
+
+</LinearLayout>
