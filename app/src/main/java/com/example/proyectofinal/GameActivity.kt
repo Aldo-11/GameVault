@@ -937,7 +937,13 @@ class GameActivity : AppCompatActivity() {
             layoutParams = android.widget.LinearLayout.LayoutParams(260, 170).apply {
                 setMargins(10, 0, 10, 0)
             }
-            setOnClickListener { hitCard() }
+            setOnClickListener {
+                if (isSplitHand && splitFinished) {
+                    handleSplitHit()
+                } else {
+                    hitCard()
+                }
+            }
             visibility = android.view.View.GONE
         }
 
@@ -949,7 +955,13 @@ class GameActivity : AppCompatActivity() {
             layoutParams = android.widget.LinearLayout.LayoutParams(290, 170).apply {
                 setMargins(10, 0, 10, 0)
             }
-            setOnClickListener { stand() }
+            setOnClickListener {
+                if (isSplitHand && splitFinished) {
+                    handleSplitStand()
+                } else {
+                    stand()
+                }
+            }
             visibility = android.view.View.GONE
         }
 
@@ -1101,7 +1113,7 @@ class GameActivity : AppCompatActivity() {
             playerChips -= currentBet
             currentBet *= 2
 
-            // Repartir cartas adicionales a ambas manos
+            // SOLO repartir cartas adicionales al JUGADOR, NO al dealer
             dealCard(true) // Para mano principal
             dealCard(true, true) // Para mano split
 
@@ -1110,20 +1122,24 @@ class GameActivity : AppCompatActivity() {
             playerSum = calculateSum(playerCards, playerAces)
 
             updateBetDisplay()
-            updateDisplay() // Mostrar cartas inmediatamente
+            updateDisplay()
 
             // Ocultar botones avanzados durante el split
             btnDouble.visibility = android.view.View.GONE
             btnSplit.visibility = android.view.View.GONE
 
-            // VERIFICAR SI LA MANO PRINCIPAL LLEGÓ A 21 O SE PASÓ
-            if (playerSum >= 21) {
-                gameInfo.text = "Mano principal: $playerSum. Pasando a mano split..."
+            // SOLO VERIFICAR SI LA MANO PRINCIPAL SE PASÓ
+            if (playerSum > 21) {
+                gameInfo.text = "Mano principal se pasó ($playerSum). Pasando a mano split..."
+                btnHit.isEnabled = false
+                btnStand.isEnabled = false
                 android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
                     playSplitSecondHand()
                 }, 1500)
             } else {
-                gameInfo.text = "Split creado - Jugando mano principal ($playerSum)"
+                gameInfo.text = "Split creado - Jugando mano principal (Principal: $playerSum | Split: $splitSum)"
+                btnHit.isEnabled = true
+                btnStand.isEnabled = true
             }
         }
     }
@@ -1215,31 +1231,47 @@ class GameActivity : AppCompatActivity() {
 
 
     private fun hitCard() {
-        if (!gameActive) return
-        playSoundBJ("pedir_bj") // ← AGREGAR ESTA LÍNEA
+        if (!gameActive && !isSplitHand) return
 
-        if (isSplitHand) {
-            // Lógica de split simplificada
-            if (playerSum <= 21) {
-                dealCard(true)
-                updateDisplay()
+        if (isSplitHand && !splitFinished) {
+            // Jugando mano principal durante split
+            playSoundBJ("pedir_bj")
+            dealCard(true)
+            updateDisplay()
 
-                if (playerSum > 21) {
-                    gameInfo.text = "Mano principal se pasó ($playerSum). Jugando mano split..."
-                    android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
-                        playSplitSecondHand()
-                    }, 1500)
-                    return
-                }
+            if (playerSum > 21) {
+                gameInfo.text = "Mano principal se pasó ($playerSum). Pasando a mano split..."
+                btnHit.isEnabled = false
+                btnStand.isEnabled = false
+
+                android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
+                    splitFinished = true
+                    playSplitSecondHand()
+                }, 1500)
+                return
+            }
+
+            if (playerSum == 21) {
+                gameInfo.text = "¡21 en mano principal! Pasando a mano split..."
+                btnHit.isEnabled = false
+                btnStand.isEnabled = false
+
+                android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
+                    splitFinished = true
+                    playSplitSecondHand()
+                }, 1500)
+                return
             }
         } else {
+            // Juego normal sin split
+            playSoundBJ("pedir_bj")
             dealCard(true)
             updateDisplay()
             checkAdvancedOptions()
 
             if (playerSum > 21) {
                 gameActive = false
-                playSoundBJ("perder_bj") // ← AGREGAR ESTA LÍNEA
+                playSoundBJ("perder_bj")
                 showGameResult("¡TE PASASTE! Perdiste $currentBet fichas")
                 return
             }
@@ -1250,79 +1282,73 @@ class GameActivity : AppCompatActivity() {
         }
     }
 
-
     private fun playSplitSecondHand() {
-        // VERIFICAR SI LA MANO SPLIT LLEGÓ A 21 O SE PASÓ
+        // VERIFICAR SI LA MANO SPLIT YA LLEGÓ A 21 O SE PASÓ
         if (splitSum >= 21) {
             gameInfo.text = "Mano split: $splitSum. Dealer juega..."
             btnHit.isEnabled = false
             btnStand.isEnabled = false
+            gameActive = false
             android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
-                stand()
+                playDealerTurn()
             }, 1000)
             return
         }
 
         gameInfo.text = "Jugando mano split ($splitSum) - ¿Pedir o plantarse?"
-        btnHit.isEnabled = true
-        btnStand.isEnabled = true
 
-
-        // Actualizamos botones
-        btnHit.setOnClickListener {
-            if (splitSum <= 21) {
-                dealCard(true, true)
-                playSoundBJ("pedir_bj")
-                updateDisplay()
-
-                if (splitSum > 21) {
-                    gameInfo.text = "Mano split se pasó ($splitSum). Dealer juega..."
-
-                    // ⚡ Bloqueamos botones inmediatamente
-                    btnHit.isEnabled = false
-                    btnStand.isEnabled = false
-
-                    android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
-                        stand() // Pasar automáticamente al dealer
-                    }, 1500)
-                } else if (splitSum == 21) {
-                    gameInfo.text = "¡21 en mano split! Dealer juega..."
-
-                    btnHit.isEnabled = false
-                    btnStand.isEnabled = false
-
-                    android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
-                        stand()
-                    }, 1500)
-                }
-            }
-        }
-
-        btnStand.setOnClickListener {
-            // Cuando el jugador se planta, bloqueamos botones y pasamos al dealer
-            btnHit.isEnabled = false
-            btnStand.isEnabled = false
-            stand()
-        }
-
-        // Aseguramos que los botones estén habilitados al iniciar la mano split
+        // Habilitar botones
         btnHit.isEnabled = true
         btnStand.isEnabled = true
     }
 
+    private fun handleSplitHit() {
+        if (splitSum <= 21) {
+            dealCard(true, true)
+            playSoundBJ("pedir_bj")
+            updateDisplay()
+
+            if (splitSum > 21) {
+                gameInfo.text = "Mano split se pasó ($splitSum). Dealer juega..."
+                btnHit.isEnabled = false
+                btnStand.isEnabled = false
+                gameActive = false
+                android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
+                    playDealerTurn()
+                }, 1500)
+            } else if (splitSum == 21) {
+                gameInfo.text = "¡21 en mano split! Dealer juega..."
+                btnHit.isEnabled = false
+                btnStand.isEnabled = false
+                gameActive = false
+                android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
+                    playDealerTurn()
+                }, 1500)
+            }
+        }
+    }
+
+    private fun handleSplitStand() {
+        btnHit.isEnabled = false
+        btnStand.isEnabled = false
+        gameActive = false
+        playDealerTurn()
+    }
 
     private fun stand() {
-        if (!gameActive) return
-
-        // jugar la segunda mano
+        // Si estamos en split y no hemos terminado la primera mano
         if (isSplitHand && !splitFinished) {
             splitFinished = true
+            btnHit.isEnabled = false
+            btnStand.isEnabled = false
             playSplitSecondHand()
             return
         }
 
-
+        // Juego normal o segunda mano de split
         gameActive = false
+        btnHit.isEnabled = false
+        btnStand.isEnabled = false
         updateDisplay()
 
         android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
@@ -1331,6 +1357,9 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun playDealerTurn() {
+        // Primero revelar todas las cartas del dealer
+        updateDisplay()
+
         if (dealerSum < 17) {
             dealCard(false)
             updateDisplay()
@@ -1341,7 +1370,7 @@ class GameActivity : AppCompatActivity() {
                 } else {
                     val winnings = currentBet * 2
                     playerChips += winnings
-                    playSoundBJ("ganar_bj") // ← AGREGAR ESTA LÍNEA
+                    playSoundBJ("ganar_bj")
                     showGameResult("¡DEALER SE PASÓ! Ganas $currentBet fichas")
                 }
                 return
@@ -1373,26 +1402,31 @@ class GameActivity : AppCompatActivity() {
 
         // Total de ganancias sumando ambas manos
         val totalWinnings = mainResult.first + splitResult.first
+        val betPerHand = currentBet / 2  // Cada mano tiene la mitad de la apuesta total
+
+        // Calcular ganancia/pérdida neta
+        val netResult = totalWinnings - currentBet
 
         // Construir mensaje detallado
-        val message = "Mano Principal: ${mainResult.second}\n" +
-                "Mano Split: ${splitResult.second}\n" +
-                "Total: ${if (totalWinnings > 0) "Ganaste $totalWinnings" else "Perdiste ${currentBet * 2 - totalWinnings}"} fichas"
+        val message = buildString {
+            append("Mano Principal: ${mainResult.second}\n")
+            append("Mano Split: ${splitResult.second}\n")
+            append("Total: ")
+            when {
+                netResult > 0 -> append("Ganaste $netResult fichas")
+                netResult < 0 -> append("Perdiste ${-netResult} fichas")
+                else -> append("Empate - Recuperas tu apuesta")
+            }
+        }
 
-        // Actualizar fichas y reproducir sonido según el resultado
+        // Actualizar fichas
+        playerChips += totalWinnings
+
+        // Reproducir sonido según el resultado NETO
         when {
-            totalWinnings > 0 -> {
-                playerChips += totalWinnings
-                playSoundBJ("ganar_bj")
-            }
-            totalWinnings == 0 -> {
-                // Si no hay ganancias netas, se considera que se perdió la apuesta total
-                playSoundBJ("perder_bj")
-            }
-            else -> {
-                // Por seguridad, cualquier otro caso también se considera pérdida
-                playSoundBJ("perder_bj")
-            }
+            netResult > 0 -> playSoundBJ("ganar_bj")
+            netResult < 0 -> playSoundBJ("perder_bj")
+            // No reproducir sonido en empate
         }
 
         // Mostrar resultado
@@ -1401,13 +1435,13 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun calculateHandResult(handSum: Int, dealerSum: Int): Pair<Int, String> {
-        val betHalf = currentBet / 2
+        val betPerHand = currentBet / 2
         return when {
-            handSum > 21 -> Pair(0, "Se pasó - Pierde")
-            dealerSum > 21 -> Pair(betHalf * 2, "Dealer se pasó - Gana $betHalf")
-            dealerSum > handSum -> Pair(0, "Dealer gana - Pierde")
-            handSum > dealerSum -> Pair(betHalf * 2, "Gana $betHalf")
-            else -> Pair(betHalf, "Empate - Recupera $betHalf")
+            handSum > 21 -> Pair(0, "Se pasó - Pierde $betPerHand")
+            dealerSum > 21 -> Pair(betPerHand * 2, "Dealer se pasó - Gana $betPerHand")
+            dealerSum > handSum -> Pair(0, "Dealer gana - Pierde $betPerHand")
+            handSum > dealerSum -> Pair(betPerHand * 2, "Gana $betPerHand")
+            else -> Pair(betPerHand, "Empate - Recupera $betPerHand")
         }
     }
 
@@ -1437,7 +1471,6 @@ class GameActivity : AppCompatActivity() {
         updateBetDisplay()
     }
 
-    // updateDisplay manejo de split
     private fun updateDisplay() {
         // Mostrar cartas del jugador
         playerCardsLayout.removeAllViews()
@@ -1468,7 +1501,12 @@ class GameActivity : AppCompatActivity() {
         // Mostrar cartas del dealer
         dealerCardsLayout.removeAllViews()
         for (i in dealerCards.indices) {
-            val cardView = if (gameActive && i == 1 && !isSplitHand) {
+            // La segunda carta se mantiene oculta si:
+            // 1. El juego está activo (cualquier mano del jugador sigue jugando)
+            // 2. Es la segunda carta (índice 1)
+            val shouldHideCard = (gameActive || (isSplitHand && !splitFinished)) && i == 1
+
+            val cardView = if (shouldHideCard) {
                 createCardView("🂠")
             } else {
                 createCardView(dealerCards[i])
@@ -1483,7 +1521,8 @@ class GameActivity : AppCompatActivity() {
             playerTitle.text = "TÚ ($playerSum)"
         }
 
-        if (gameActive && dealerCards.size > 1 && !isSplitHand) {
+        // Mostrar suma del dealer según el estado del juego
+        if ((gameActive || (isSplitHand && !splitFinished)) && dealerCards.size > 1) {
             val visibleSum = calculateSum(listOf(dealerCards[0]), if (dealerCards[0].startsWith("A")) 1 else 0)
             dealerTitle.text = "DEALER ($visibleSum + ?)"
         } else {
@@ -1556,15 +1595,15 @@ class GameActivity : AppCompatActivity() {
         btnDouble.visibility = android.view.View.GONE
         btnSplit.visibility = android.view.View.GONE
 
+        // RESTAURAR LISTENERS ORIGINALES
+        btnHit.setOnClickListener { hitCard() }
+        btnStand.setOnClickListener { stand() }
+
         // Habilitar botones
         btnHit.isEnabled = true
         btnStand.isEnabled = true
         btnDouble.isEnabled = true
         btnSplit.isEnabled = true
-
-        // Restaurar eventos originales de los botones
-        btnHit.setOnClickListener { hitCard() }
-        btnStand.setOnClickListener { stand() }
 
         // Habilitar botones de apuesta si hay fichas
         if (playerChips > 0) {
