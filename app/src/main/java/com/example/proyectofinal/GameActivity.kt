@@ -937,13 +937,7 @@ class GameActivity : AppCompatActivity() {
             layoutParams = android.widget.LinearLayout.LayoutParams(260, 170).apply {
                 setMargins(10, 0, 10, 0)
             }
-            setOnClickListener {
-                if (isSplitHand && splitFinished) {
-                    handleSplitHit()
-                } else {
-                    hitCard()
-                }
-            }
+            setOnClickListener { hitCard() }
             visibility = android.view.View.GONE
         }
 
@@ -955,13 +949,7 @@ class GameActivity : AppCompatActivity() {
             layoutParams = android.widget.LinearLayout.LayoutParams(290, 170).apply {
                 setMargins(10, 0, 10, 0)
             }
-            setOnClickListener {
-                if (isSplitHand && splitFinished) {
-                    handleSplitStand()
-                } else {
-                    stand()
-                }
-            }
+            setOnClickListener { stand() }
             visibility = android.view.View.GONE
         }
 
@@ -1128,12 +1116,22 @@ class GameActivity : AppCompatActivity() {
             btnDouble.visibility = android.view.View.GONE
             btnSplit.visibility = android.view.View.GONE
 
-            // SOLO VERIFICAR SI LA MANO PRINCIPAL SE PASÓ
-            if (playerSum > 21) {
-                gameInfo.text = "Mano principal se pasó ($playerSum). Pasando a mano split..."
+// VERIFICAR SI LA MANO PRINCIPAL LLEGÓ A 21 O SE PASÓ AUTOMÁTICAMENTE
+            if (playerSum >= 21) {
+                gameInfo.text = if (playerSum > 21) {
+                    "Mano principal se pasó ($playerSum). Pasando a mano split..."
+                } else {
+                    "¡21 en mano principal! Pasando a mano split..."
+                }
                 btnHit.isEnabled = false
                 btnStand.isEnabled = false
+
+                // BLOQUEAR LISTENERS
+                btnHit.setOnClickListener(null)
+                btnStand.setOnClickListener(null)
+
                 android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
+                    splitFinished = true
                     playSplitSecondHand()
                 }, 1500)
             } else {
@@ -1244,6 +1242,10 @@ class GameActivity : AppCompatActivity() {
                 btnHit.isEnabled = false
                 btnStand.isEnabled = false
 
+                // BLOQUEAR LISTENERS
+                btnHit.setOnClickListener(null)
+                btnStand.setOnClickListener(null)
+
                 android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
                     splitFinished = true
                     playSplitSecondHand()
@@ -1255,6 +1257,10 @@ class GameActivity : AppCompatActivity() {
                 gameInfo.text = "¡21 en mano principal! Pasando a mano split..."
                 btnHit.isEnabled = false
                 btnStand.isEnabled = false
+
+                // BLOQUEAR LISTENERS
+                btnHit.setOnClickListener(null)
+                btnStand.setOnClickListener(null)
 
                 android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
                     splitFinished = true
@@ -1297,7 +1303,11 @@ class GameActivity : AppCompatActivity() {
 
         gameInfo.text = "Jugando mano split ($splitSum) - ¿Pedir o plantarse?"
 
-        // Habilitar botones
+// RECONFIGURAR LISTENERS para mano split
+        btnHit.setOnClickListener { handleSplitHit() }
+        btnStand.setOnClickListener { handleSplitStand() }
+
+// Habilitar botones
         btnHit.isEnabled = true
         btnStand.isEnabled = true
     }
@@ -1336,11 +1346,15 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun stand() {
-        // Si estamos en split y no hemos terminado la primera mano
         if (isSplitHand && !splitFinished) {
             splitFinished = true
             btnHit.isEnabled = false
             btnStand.isEnabled = false
+
+            // BLOQUEAR LISTENERS
+            btnHit.setOnClickListener(null)
+            btnStand.setOnClickListener(null)
+
             playSplitSecondHand()
             return
         }
