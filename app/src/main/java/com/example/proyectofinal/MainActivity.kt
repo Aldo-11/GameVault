@@ -11,15 +11,14 @@ import com.example.proyectofinal.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    // View Binding para acceder fácilmente a las vistas
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        // ⭐⭐ NUEVO: LIMPIAR SESIÓN DE JUEGOS AL ABRIR LA APP ⭐⭐
-        clearGameSession()
+        // VERIFICAR SI HAY UNA SESIÓN ACTIVA AL INICIAR LA APP
+        checkExistingSession()
 
         // Inicializar View Binding
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -31,11 +30,46 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        // LIMPIAR SESIÓN DE JUEGOS (pero no la del usuario)
+        clearGameSession()
+
         // Configurar los botones
         setupButtons()
     }
 
-    // ⭐⭐ NUEVO MÉTODO: Limpiar progresos de juegos ⭐⭐
+    // NUEVO MeTODO: Verificar si ya hay una sesión activa
+    private fun checkExistingSession() {
+        val sessionPrefs = getSharedPreferences("UserSession", MODE_PRIVATE)
+        val isLoggedIn = sessionPrefs.getBoolean("isLoggedIn", false)
+        val username = sessionPrefs.getString("username", "")
+
+        if (isLoggedIn && !username.isNullOrEmpty()) {
+            // Si hay sesión activa, ir directamente al menú principal
+            navigateToMainMenu(username, true) // true = reingreso
+        }
+        // Si no hay sesión, continuar mostrando el login
+    }
+
+    // NUEVO MeTODO: Guardar sesión cuando el usuario inicia sesión
+    private fun saveUserSession(username: String) {
+        val sessionPrefs = getSharedPreferences("UserSession", MODE_PRIVATE)
+        sessionPrefs.edit().apply {
+            putBoolean("isLoggedIn", true)
+            putString("username", username)
+            apply()
+        }
+    }
+
+    // NUEVO MeTODO: Para cerrar sesión (llamado desde otras actividades)
+    fun logoutUser() {
+        val sessionPrefs = getSharedPreferences("UserSession", MODE_PRIVATE)
+        sessionPrefs.edit().apply {
+            putBoolean("isLoggedIn", false)
+            remove("username")
+            apply()
+        }
+    }
+
     private fun clearGameSession() {
         val prefs = getSharedPreferences("GamePrefs", MODE_PRIVATE)
         prefs.edit().apply {
@@ -63,15 +97,12 @@ class MainActivity : AppCompatActivity() {
         binding.btnTogglePassword.setOnClickListener {
             passwordVisible = !passwordVisible
             if (passwordVisible) {
-                // Mostrar texto normal
                 binding.editTextPassword.inputType =
                     android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
             } else {
-                // Ocultar texto (modo contraseña)
                 binding.editTextPassword.inputType =
                     android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
             }
-            // Mover el cursor al final para no perder posición
             binding.editTextPassword.setSelection(binding.editTextPassword.text.length)
         }
 
@@ -106,7 +137,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loginUser(username: String, password: String) {
-        // Usar SharedPreferences para verificar si el usuario existe
         val sharedPref = getSharedPreferences("GameLibraryUsers", MODE_PRIVATE)
         val savedPassword = sharedPref.getString(username, null)
 
@@ -114,24 +144,24 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Usuario no encontrado. Por favor regístrate primero.", Toast.LENGTH_LONG).show()
         } else if (savedPassword == password) {
             Toast.makeText(this, "¡Bienvenido $username!", Toast.LENGTH_SHORT).show()
-            // Aquí navegaremos a la pantalla principal (próximo paso)
-            navigateToMainMenu(username)
+
+            // GUARDAR LA SESIÓN DEL USUARIO
+            saveUserSession(username)
+
+            navigateToMainMenu(username, false) // false = primer ingreso
         } else {
             Toast.makeText(this, "Contraseña incorrecta", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun registerUser(username: String, password: String) {
-        // Usar SharedPreferences para guardar el usuario
         val sharedPref = getSharedPreferences("GameLibraryUsers", MODE_PRIVATE)
 
-        // Verificar si el usuario ya existe
         if (sharedPref.contains(username)) {
             Toast.makeText(this, "El usuario ya existe. Usa 'INICIAR SESIÓN'", Toast.LENGTH_LONG).show()
             return
         }
 
-        // Guardar el nuevo usuario
         with(sharedPref.edit()) {
             putString(username, password)
             apply()
@@ -141,9 +171,11 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, "Ahora puedes iniciar sesión", Toast.LENGTH_LONG).show()
     }
 
-    private fun navigateToMainMenu(username: String) {
+    //MODIFICADO: Ahora recibe un parámetro para saber si es reingreso
+    private fun navigateToMainMenu(username: String, isReturningUser: Boolean) {
         val intent = Intent(this, CategoriesActivity::class.java)
         intent.putExtra("USERNAME", username)
+        intent.putExtra("IS_RETURNING_USER", isReturningUser) // NUEVO EXTRA
         startActivity(intent)
         finish() // Cierra la pantalla de login
     }

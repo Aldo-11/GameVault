@@ -26,6 +26,14 @@ class CategoriesActivity : AppCompatActivity() {
         // Obtener el nombre de usuario pasado desde MainActivity
         username = intent.getStringExtra("USERNAME") ?: "Usuario"
 
+        // NUEVO: Obtener si es usuario que regresa y mostrar mensaje
+        val isReturningUser = intent.getBooleanExtra("IS_RETURNING_USER", false)
+        if (isReturningUser) {
+            Toast.makeText(this, "¡Bienvenido de nuevo $username!", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "¡Bienvenido $username!", Toast.LENGTH_SHORT).show()
+        }
+
         // Configurar la interfaz
         setupUI()
         setupButtons()
@@ -87,6 +95,16 @@ class CategoriesActivity : AppCompatActivity() {
 
     private fun logout() {
         Toast.makeText(this, "Cerrando sesión...", Toast.LENGTH_SHORT).show()
+
+        // LIMPIAR SESIÓN DEL USUARIO
+        val sessionPrefs = getSharedPreferences("UserSession", MODE_PRIVATE)
+        sessionPrefs.edit().apply {
+            putBoolean("isLoggedIn", false)
+            remove("username")
+            apply()
+        }
+
+        // Limpiar sesiones de juegos
         val prefs = getSharedPreferences("GamePrefs", MODE_PRIVATE)
         prefs.edit().apply {
             remove("Session_TTT_PlayerScore")
@@ -96,6 +114,7 @@ class CategoriesActivity : AppCompatActivity() {
             remove("Session_Snake_Score")
             apply()
         }
+
         // Crear intent para regresar al login
         val intent = Intent(this, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
